@@ -6,8 +6,23 @@
   - `npm run test-palindrome`
 */
 
+/**
+ * 
+ * @param {string} str 
+ * @returns {boolean}
+ */
+
 function isPalindrome(str) {
-  return true;
+  
+  let excludedCharacters = [' ', ',', '!', '?', '.']
+  let charCodes = str.toLocaleLowerCase().split('').filter(c => !excludedCharacters.includes(c)).map(c => c.charCodeAt())
+  return charCodes.every((codeFromStart, idx) => {
+    let idxFromEnd = charCodes.length-1-idx
+    let codeFromEnd = charCodes[idxFromEnd]
+    return codeFromStart == codeFromEnd
+  })
 }
+
+console.log(isPalindrome('Able, was I ere I saw Elba!'))
 
 module.exports = isPalindrome;
